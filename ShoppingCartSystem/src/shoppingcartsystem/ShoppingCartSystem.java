@@ -35,24 +35,29 @@ public class ShoppingCartSystem {
                 int amountIn = sc.nextInt();
                 cart.addTo(store.getItem(itemIn), amountIn);
             }
-            System.out.println("Would you like to add anything else?\n> Yes\n> No\n>> ");
+            System.out.print("Would you like to add anything else?\n> Yes\n> No\n>> ");
             String confirmIn = sc.next();
             if (confirmIn.equalsIgnoreCase("yes")) {
                 continue;
             }
             cart.printCart();
-            System.out.println("Confirm Purchase?\n> Yes\n> No\n>> ");
+            System.out.print("Confirm Purchase?\n> Yes\n> No\n>> ");
             String purchaseIn = sc.next();
             if (purchaseIn.equalsIgnoreCase("yes")) {
                 confirmPurchase(currentUser, cart, store);
             }
-            
-            
-            
-            
+            cart.clear();
+            System.out.print("Quit?\n> Yes\n No\n>> ");
+            String quitIn = sc.next();
+            if (quitIn.equalsIgnoreCase("yes")) {
+                break;
+            }
         }
+        sc.close();
+        System.exit(0);
     }
     
+    // Function to initialize and create a new user and store it in the array of users.
     public static void newUser(String firstname, String lastname, ArrayList<User> users, int inc) {
         User newUser = new User(firstname, lastname);
         newUser.setID(100000 + inc);
@@ -60,6 +65,7 @@ public class ShoppingCartSystem {
         inc++;
     }
     
+    // Function to set the active user based on the ID of the user in the array
     public static User setCurrentUser(long ID, ArrayList<User> users) {
         if (!users.isEmpty()) {        // Prevents the code from running if
                                        // there are no users stored
@@ -69,7 +75,7 @@ public class ShoppingCartSystem {
                 }
             }
         }
-        return null;
+        return null;    // returns nothing when nothing is found
     }
     
     public static void confirmPurchase(User user, Cart cart, Shop shop) {
