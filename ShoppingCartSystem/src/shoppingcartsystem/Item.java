@@ -43,7 +43,24 @@ public class Item {
             num = 0;
         }
         this.stock += num;
-        System.out.printf("%s Stock = %d (+%d)", this.name, this.stock, num);
+        System.out.printf("%s Stock = %d (+%d)%n", this.name, this.stock, num);
+    }
+    
+    public void sell(int num) {
+        if (num < 0) {
+            num = 0;
+        }
+        this.stock -= num;
+        System.out.printf("%s Stock = %d (-%d)%n", this.name, this.stock, num);
+    }
+    
+    @Override
+    public String toString() {      // Custom toString method
+        String formatStr = String.format("Item name: %s%nPrice: $%.2f%nCurrent Stock: %d", getName(), getPrice(), getStock());;
+        if (getStock() == 0) {
+            formatStr = String.format("Item name: %s%nPrice: $%.2f%nCurrent Stock: Out of Stock", getName(), getPrice());
+        }
+        return formatStr;
     }
 }
 
